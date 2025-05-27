@@ -1,3 +1,4 @@
+// Тапсырмалар массиві
 const tasks = [
     {
         question: "A1 (Ағылшын): 'apple' сөзінің дұрыс аудармасы?",
@@ -16,11 +17,10 @@ const tasks = [
     }
 ];
 
-let userAnswers = new Array(tasks.length).fill(null); // Пайдаланушы жауаптарын сақтау
 let score = 0;
-
 const container = document.getElementById("taskContainer");
 
+// Әр тапсырманы шығару
 tasks.forEach((task, index) => {
     const div = document.createElement("div");
     div.classList.add("task");
@@ -32,18 +32,16 @@ tasks.forEach((task, index) => {
     task.options.forEach(option => {
         const btn = document.createElement("button");
         btn.textContent = option;
+        btn.classList.add("option-btn");
         btn.onclick = () => {
-            // Бірінші жауапты сақтау
-            if (userAnswers[index] !== null) return; // Бір ғана жауапқа рұқсат
-
-            userAnswers[index] = option; // Жауапты сақтау
+            if (btn.disabled) return;
             if (option === task.correct) {
                 btn.style.backgroundColor = "green";
+                score++;
             } else {
                 btn.style.backgroundColor = "red";
             }
-
-            // Басқа батырмаларды блоктау
+            // Барлық батырмаларды блоктау
             const buttons = div.querySelectorAll("button");
             buttons.forEach(b => b.disabled = true);
         };
@@ -53,13 +51,7 @@ tasks.forEach((task, index) => {
     container.appendChild(div);
 });
 
+// Нәтиже шығару функциясы
 function showScore() {
-    score = 0;
-    userAnswers.forEach((answer, index) => {
-        if (answer === tasks[index].correct) {
-            score++;
-        }
-    });
-
     document.getElementById("scoreDisplay").textContent = `Сіздің нәтижеңіз: ${score} / ${tasks.length}`;
 }
