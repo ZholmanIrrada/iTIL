@@ -16,6 +16,7 @@ const tasks = [
     }
 ];
 
+let userAnswers = new Array(tasks.length).fill(null); // Пайдаланушы жауаптарын сақтау
 let score = 0;
 
 const container = document.getElementById("taskContainer");
@@ -32,14 +33,17 @@ tasks.forEach((task, index) => {
         const btn = document.createElement("button");
         btn.textContent = option;
         btn.onclick = () => {
-            if (btn.disabled) return;
+            // Бірінші жауапты сақтау
+            if (userAnswers[index] !== null) return; // Бір ғана жауапқа рұқсат
+
+            userAnswers[index] = option; // Жауапты сақтау
             if (option === task.correct) {
                 btn.style.backgroundColor = "green";
-                score++;
             } else {
                 btn.style.backgroundColor = "red";
             }
-            // Disable all buttons in this task
+
+            // Басқа батырмаларды блоктау
             const buttons = div.querySelectorAll("button");
             buttons.forEach(b => b.disabled = true);
         };
@@ -50,5 +54,12 @@ tasks.forEach((task, index) => {
 });
 
 function showScore() {
+    score = 0;
+    userAnswers.forEach((answer, index) => {
+        if (answer === tasks[index].correct) {
+            score++;
+        }
+    });
+
     document.getElementById("scoreDisplay").textContent = `Сіздің нәтижеңіз: ${score} / ${tasks.length}`;
 }
