@@ -1,54 +1,54 @@
-let score = 0;
-let total = 0;
-
-function startEnglish() {
-    score = 0;
-    total = 2;
-    document.getElementById('content').innerHTML = `
-        <h3>A1-A2 Ағылшын тапсырмалары</h3>
-        <p>1. To be формасын таңдаңыз:</p>
-        <p>She ___ a doctor.</p>
-        <button onclick="checkAnswer('is', true)">is</button>
-        <button onclick="checkAnswer('are', false)">are</button>
-        <button onclick="checkAnswer('am', false)">am</button>
-        <p>2. Керекті сөзді таңдаңыз: I ___ a student.</p>
-        <button onclick="checkAnswer('am', true)">am</button>
-        <button onclick="checkAnswer('is', false)">is</button>
-        <button onclick="checkAnswer('are', false)">are</button>
-        <button onclick="showResult()">Нәтиже көру</button>
-    `;
-}
-
-function startRussian() {
-    score = 0;
-    total = 2;
-    document.getElementById('content').innerHTML = `
-        <h3>A1-A2 Орыс тапсырмалары</h3>
-        <p>1. "Мама" сөзін аударыңыз:</p>
-        <button onclick="checkAnswer('mother', true)">mother</button>
-        <button onclick="checkAnswer('father', false)">father</button>
-        <p>2. "Книга" сөзін аударыңыз:</p>
-        <button onclick="checkAnswer('book', true)">book</button>
-        <button onclick="checkAnswer('pen', false)">pen</button>
-        <button onclick="showResult()">Нәтиже көру</button>
-    `;
-}
-
-function checkAnswer(answer, correct) {
-    if (correct) {
-        alert("Дұрыс!");
-        score++;
-    } else {
-        alert("Қате!");
+const tasks = [
+    {
+        question: "A1 (Ағылшын): 'apple' сөзінің дұрыс аудармасы?",
+        options: ["яблоко", "банан", "груша", "апельсин"],
+        correct: "яблоко"
+    },
+    {
+        question: "A2 (Ағылшын): 'book' сөзінің дұрыс аудармасы?",
+        options: ["книга", "тетрадь", "линейка", "ручка"],
+        correct: "книга"
+    },
+    {
+        question: "A1 (Орыс): 'Доброе утро' ағылшын тілінде қалай?",
+        options: ["Good morning", "Good evening", "Good night", "Hello"],
+        correct: "Good morning"
     }
-}
+];
 
-function showResult() {
-    document.getElementById('content').innerHTML += `
-        <div class="result">
-            <h4>Нәтиже:</h4>
-            <p>Дұрыс жауаптар: ${score} / ${total}</p>
-            <p>Сіздің ұпайыңыз: ${Math.round((score/total)*100)}%</p>
-        </div>
-    `;
+let score = 0;
+
+const container = document.getElementById("taskContainer");
+
+tasks.forEach((task, index) => {
+    const div = document.createElement("div");
+    div.classList.add("task");
+
+    const q = document.createElement("h3");
+    q.textContent = `${index + 1}. ${task.question}`;
+    div.appendChild(q);
+
+    task.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.onclick = () => {
+            if (btn.disabled) return;
+            if (option === task.correct) {
+                btn.style.backgroundColor = "green";
+                score++;
+            } else {
+                btn.style.backgroundColor = "red";
+            }
+            // Disable all buttons in this task
+            const buttons = div.querySelectorAll("button");
+            buttons.forEach(b => b.disabled = true);
+        };
+        div.appendChild(btn);
+    });
+
+    container.appendChild(div);
+});
+
+function showScore() {
+    document.getElementById("scoreDisplay").textContent = `Сіздің нәтижеңіз: ${score} / ${tasks.length}`;
 }
