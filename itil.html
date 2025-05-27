@@ -1,126 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
-    <title>Language Learning Game</title>
+    <title>Ағылшын және Орыс тілдерін үйрену</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f3f8;
+            background-color: #f7f7f7;
+            padding: 20px;
             color: #333;
-            margin: 0;
-            padding: 0;
         }
 
-        header {
-            background-color: #cb9cb6;
-            padding: 20px;
+        h1 {
             text-align: center;
-            color: white;
+            color: #cb9cb6;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        .question {
-            margin-bottom: 15px;
-        }
-
-        .result {
-            margin-top: 20px;
+        .task {
+            background-color: #fff;
+            border: 2px solid #cb9cb6;
             padding: 10px;
-            background-color: #eee;
-            border-radius: 5px;
+            margin-bottom: 10px;
+            border-radius: 8px;
         }
 
-        button {
+        .task h3 {
+            margin-top: 0;
+        }
+
+        button.option-btn {
+            padding: 10px;
             background-color: #cb9cb6;
-            color: white;
-            padding: 10px 20px;
+            color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
+            margin: 5px;
             cursor: pointer;
         }
 
-        button:hover {
-            background-color: #b67ca6;
+        button.option-btn:hover {
+            background-color: #b57aa3;
+        }
+
+        button.finish-btn {
+            display: block;
+            padding: 12px 20px;
+            background-color: #cb9cb6;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            margin: 20px auto;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button.finish-btn:hover {
+            background-color: #b57aa3;
+        }
+
+        #scoreDisplay {
+            font-size: 20px;
+            text-align: center;
+            margin-top: 20px;
+            color: #cb9cb6;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Learn English & Russian: A1-A2</h1>
-    </header>
+    <h1>A1-A2 деңгейіндегі тапсырмалар</h1>
+    <div id="taskContainer"></div>
+    <button class="finish-btn" onclick="showScore()">Нәтижені көру</button>
+    <div id="scoreDisplay"></div>
 
-    <div class="container">
-        <h2>Choose the correct answers:</h2>
-
-        <form id="quizForm">
-            <div class="question">
-                <p>1. Translate to English: "Привет"</p>
-                <label><input type="radio" name="q1" value="correct"> Hello</label><br>
-                <label><input type="radio" name="q1" value="wrong"> Goodbye</label><br>
-                <label><input type="radio" name="q1" value="wrong"> Thank you</label>
-            </div>
-
-            <div class="question">
-                <p>2. Which is the correct form: "I ___ a book"</p>
-                <label><input type="radio" name="q2" value="wrong"> readed</label><br>
-                <label><input type="radio" name="q2" value="correct"> read</label><br>
-                <label><input type="radio" name="q2" value="wrong"> reads</label>
-            </div>
-
-            <div class="question">
-                <p>3. Переведи на русский: "Thank you"</p>
-                <label><input type="radio" name="q3" value="correct"> Спасибо</label><br>
-                <label><input type="radio" name="q3" value="wrong"> Пожалуйста</label><br>
-                <label><input type="radio" name="q3" value="wrong"> Здравствуйте</label>
-            </div>
-
-            <button type="button" onclick="checkAnswers()">Submit</button>
-        </form>
-
-        <div class="result" id="result"></div>
-    </div>
-
-    <script>
-        function checkAnswers() {
-            const form = document.getElementById('quizForm');
-            const result = document.getElementById('result');
-            let correct = 0;
-            let total = 3;
-            let answers = "";
-
-            const q1 = form.q1.value;
-            const q2 = form.q2.value;
-            const q3 = form.q3.value;
-
-            if (q1 === "correct") {
-                correct++; answers += "1. ✅ Correct<br>";
-            } else {
-                answers += "1. ❌ Wrong<br>";
-            }
-
-            if (q2 === "correct") {
-                correct++; answers += "2. ✅ Correct<br>";
-            } else {
-                answers += "2. ❌ Wrong<br>";
-            }
-
-            if (q3 === "correct") {
-                correct++; answers += "3. ✅ Correct<br>";
-            } else {
-                answers += "3. ❌ Wrong<br>";
-            }
-
-            result.innerHTML = `<strong>Your score: ${correct}/${total}</strong><br>${answers}`;
-        }
-    </script>
+    <!-- JavaScript файлын қосу -->
+    <script src="script.js"></script>
 </body>
 </html>
