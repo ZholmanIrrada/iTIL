@@ -1,33 +1,126 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Тіл үйрену ойыны</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Language Learning Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f3f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #cb9cb6;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            margin-bottom: 15px;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #cb9cb6;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #b67ca6;
+        }
+    </style>
 </head>
 <body>
-    <h1>Қош келдіңіз!</h1>
-    <h2>Ағылшын және Орыс тілін үйрену (A1-A2)</h2>
-    <button onclick="startEnglish()">Ағылшын т<!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <title>Тіл үйрету - A1-A2 деңгей</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Ағылшын және Орыс тілдері бойынша тапсырмалар</h1>
-    <div id="taskContainer"></div>
-    <button onclick="showScore()">Нәтиже</button>
-    <div id="scoreDisplay"></div>
+    <header>
+        <h1>Learn English & Russian: A1-A2</h1>
+    </header>
 
-    <script src="script.js"></script>
-</body>
-</html>
-апсырмалары</button>
-    <button onclick="startRussian()">Орыс тапсырмалары</button>
-    <div id="content"></div>
+    <div class="container">
+        <h2>Choose the correct answers:</h2>
 
-    <script src="script.js"></script>
+        <form id="quizForm">
+            <div class="question">
+                <p>1. Translate to English: "Привет"</p>
+                <label><input type="radio" name="q1" value="correct"> Hello</label><br>
+                <label><input type="radio" name="q1" value="wrong"> Goodbye</label><br>
+                <label><input type="radio" name="q1" value="wrong"> Thank you</label>
+            </div>
+
+            <div class="question">
+                <p>2. Which is the correct form: "I ___ a book"</p>
+                <label><input type="radio" name="q2" value="wrong"> readed</label><br>
+                <label><input type="radio" name="q2" value="correct"> read</label><br>
+                <label><input type="radio" name="q2" value="wrong"> reads</label>
+            </div>
+
+            <div class="question">
+                <p>3. Переведи на русский: "Thank you"</p>
+                <label><input type="radio" name="q3" value="correct"> Спасибо</label><br>
+                <label><input type="radio" name="q3" value="wrong"> Пожалуйста</label><br>
+                <label><input type="radio" name="q3" value="wrong"> Здравствуйте</label>
+            </div>
+
+            <button type="button" onclick="checkAnswers()">Submit</button>
+        </form>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            const form = document.getElementById('quizForm');
+            const result = document.getElementById('result');
+            let correct = 0;
+            let total = 3;
+            let answers = "";
+
+            const q1 = form.q1.value;
+            const q2 = form.q2.value;
+            const q3 = form.q3.value;
+
+            if (q1 === "correct") {
+                correct++; answers += "1. ✅ Correct<br>";
+            } else {
+                answers += "1. ❌ Wrong<br>";
+            }
+
+            if (q2 === "correct") {
+                correct++; answers += "2. ✅ Correct<br>";
+            } else {
+                answers += "2. ❌ Wrong<br>";
+            }
+
+            if (q3 === "correct") {
+                correct++; answers += "3. ✅ Correct<br>";
+            } else {
+                answers += "3. ❌ Wrong<br>";
+            }
+
+            result.innerHTML = `<strong>Your score: ${correct}/${total}</strong><br>${answers}`;
+        }
+    </script>
 </body>
 </html>
